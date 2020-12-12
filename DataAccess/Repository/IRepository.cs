@@ -6,7 +6,14 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Repository
 {
-    interface IRepository
+    public interface IRepository<T> where T :class
     {
+        void Add(T dto);
+
+        void Update(T dto);
+
+        void Delete(T dto);
+
+        void Get();
     }
 }

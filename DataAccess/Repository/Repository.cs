@@ -6,7 +6,26 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Repository
 {
-    class Repository
+    public class Repository<T> : IRepository<T> where T : class
     {
+        public void Add(T dto)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Delete(T dto)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Get()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Update(T dto)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
