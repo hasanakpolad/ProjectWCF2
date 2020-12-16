@@ -1,0 +1,169 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="project2dbModel.Store" Alias="Self" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.7" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="project2dbModelStoreContainer">
+    <EntitySet Name="customer" EntityType="project2dbModel.Store.customer" store:Type="Tables" Schema="Project2" />
+    <EntitySet Name="product" EntityType="project2dbModel.Store.product" store:Type="Tables" Schema="Project2" />
+    <EntitySet Name="buy_history" EntityType="project2dbModel.Store.buy_history" store:Type="Tables" Schema="Project2" />
+    <EntitySet Name="log" EntityType="project2dbModel.Store.log" store:Type="Tables" Schema="Project2" />
+  </EntityContainer>
+  <EntityType Name="customer">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="UserName" Type="varchar" Nullable="true" MaxLength="45" />
+    <Property Name="Password" Type="varchar" Nullable="true" MaxLength="45" />
+    <Property Name="Mail" Type="varchar" Nullable="true" MaxLength="45" />
+  </EntityType>
+  <EntityType Name="product">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Price" Type="double" Nullable="false" />
+    <Property Name="Stock" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="buy_history">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProductName" Type="longtext" Nullable="false" />
+    <Property Name="Price" Type="double" Nullable="false" />
+    <Property Name="Count" Type="int" Nullable="false" />
+    <Property Name="CustomerId" Type="int" Nullable="false" />
+    <Property Name="ProductId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="log">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstDatetime" Type="datetime" Nullable="false" />
+    <Property Name="Text" Type="longtext" Nullable="false" />
+    <Property Name="LastDatetime" Type="datetime" Nullable="false" />
+  </EntityType>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="project2dbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+          <Property Name="Mail" Type="String" MaxLength="45" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="project2dbEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="customer" EntityType="project2dbModel.Customer" />
+          <EntitySet Name="product" EntityType="project2dbModel.Product" />
+          <EntitySet Name="buy_history" EntityType="project2dbModel.BuyHistory" />
+          <EntitySet Name="log" EntityType="project2dbModel.Log" />
+        </EntityContainer>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Price" Type="Double" Nullable="false" />
+          <Property Name="Stock" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BuyHistory">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductName" Type="String" Nullable="false" />
+          <Property Name="Price" Type="Double" Nullable="false" />
+          <Property Name="Count" Type="Int32" Nullable="false" />
+          <Property Name="CustomerId" Type="Int32" Nullable="false" />
+          <Property Name="ProductId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstDatetime" Type="DateTime" Nullable="false" />
+          <Property Name="Text" Type="String" Nullable="false" />
+          <Property Name="LastDatetime" Type="DateTime" Nullable="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="project2dbModelStoreContainer" CdmEntityContainer="project2dbEntities">
+    <EntitySetMapping Name="customer">
+      <EntityTypeMapping TypeName="IsTypeOf(project2dbModel.Customer)">
+        <MappingFragment StoreEntitySet="customer">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Mail" ColumnName="Mail" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="product">
+      <EntityTypeMapping TypeName="IsTypeOf(project2dbModel.Product)">
+        <MappingFragment StoreEntitySet="product">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Stock" ColumnName="Stock" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="buy_history">
+      <EntityTypeMapping TypeName="IsTypeOf(project2dbModel.BuyHistory)">
+        <MappingFragment StoreEntitySet="buy_history">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Count" ColumnName="Count" />
+          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+          <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="log">
+      <EntityTypeMapping TypeName="IsTypeOf(project2dbModel.Log)">
+        <MappingFragment StoreEntitySet="log">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FirstDatetime" ColumnName="FirstDatetime" />
+          <ScalarProperty Name="Text" ColumnName="Text" />
+          <ScalarProperty Name="LastDatetime" ColumnName="LastDatetime" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="DDLGenerationTemplate" Value="$(VSEFTools)\DBGen\SSDLToMySQL.tt" />
+        <DesignerProperty Name="DefaultDatabaseSchema" Value="Project2" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
