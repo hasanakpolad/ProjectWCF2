@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.Repository
 {
-    public interface IRepository<T> where T :class
+    public interface IRepository<T> where T : class
     {
         void Add(T dto);
 
@@ -14,6 +14,6 @@ namespace DataAccess.Repository
 
         void Delete(T dto);
 
-        void Get();
+        T Get();
     }
 }
