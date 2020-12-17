@@ -1,4 +1,5 @@
-﻿//using Data;
+﻿using Data;
+using Data.Dtoes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,11 +16,11 @@ namespace ProjectWCF2.Interfaces
     {
         [OperationContract]
         [WebInvoke(RequestFormat = WebMessageFormat.Json, Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "AddCustomer")]
-        string AddCustomer();
+        string AddCustomer(CustomerDto dto);
 
         [OperationContract]
         [WebInvoke(RequestFormat = WebMessageFormat.Json, Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "UpdateCustomer")]
-        string UpdateCustomer();
+        string UpdateCustomer(CustomerDto dto);
 
         [OperationContract]
         [WebInvoke(RequestFormat = WebMessageFormat.Json, Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "GetCustomer")]
@@ -27,6 +28,6 @@ namespace ProjectWCF2.Interfaces
 
         [OperationContract]
         [WebInvoke(RequestFormat = WebMessageFormat.Json, Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "DeleteCustomer")]
-        string DeleteCustomer();
+        string DeleteCustomer(CustomerDto dto);
     }
 }

@@ -27,9 +27,9 @@ namespace DataAccess.Repository
             _dbSet.Remove(dto);
         }
 
-        public T Get()
+        public T Get(int Id)
         {
-            return _dbSet.Find();
+            return _dbSet.Find(Id);
         }
 
         public void Update(T dto)

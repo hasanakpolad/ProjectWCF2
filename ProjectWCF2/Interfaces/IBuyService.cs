@@ -12,6 +12,15 @@ namespace ProjectWCF2.Interfaces
     public interface IBuyService
     {
         [OperationContract]
-        void DoWork();
+        string AddSales();
+
+        [OperationContract]
+        string UpdateSales();
+
+        [OperationContract]
+        string GetSales();
+
+        [OperationContract]
+        string DeleteSales();
     }
 }

@@ -1,9 +1,11 @@
-﻿using Data;
+﻿//using Data;
+using Data.Dtoes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.ServiceModel;
+using System.ServiceModel.Web;
 using System.Text;
 
 namespace ProjectWCF2.Interfaces
@@ -13,14 +15,19 @@ namespace ProjectWCF2.Interfaces
     public interface IProductService
     {
         [OperationContract]
-        string AddProject(Product dto);
+        [WebInvoke(RequestFormat = WebMessageFormat.Json, Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "AddProduct")]
+        string AddProduct(ProductDto dto);
 
         [OperationContract]
-        string UpdateProject(Customer dto);
+        [WebInvoke(RequestFormat = WebMessageFormat.Json, Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "UpdateProduct")]
+        string UpdateProduct(ProductDto dto);
 
         [OperationContract]
-        string GetProject();
+        [WebInvoke(RequestFormat = WebMessageFormat.Json, Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "GetProduct")]
+        string GetProduct(SearchDto dto);
 
-        string DeleteProject();
+        [OperationContract]
+        [WebInvoke(RequestFormat = WebMessageFormat.Json, Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "DeleteProduct")]
+        string DeleteProduct(ProductDto dto);
     }
 }

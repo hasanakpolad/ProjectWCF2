@@ -14,6 +14,6 @@ namespace DataAccess.Repository
 
         void Delete(T dto);
 
-        T Get();
+        T Get(int Id);
     }
 }

@@ -1,40 +1,152 @@
-﻿//using Data;
+﻿using Data;
+using Data.Dtoes;
 using DataAccess.UnitOfWork;
 using ProjectWCF2.Interfaces;
 using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Net;
 using System.ServiceModel.Web;
-using System.Web;
 
 namespace ProjectWCF2.Services
 {
     public class CustomerService : ICustomerService
     {
-        public string AddCustomer()
+        WebOperationContext webOperationContext = WebOperationContext.Current;
+
+        public string AddCustomer(CustomerDto dto)
         {
-            //using (UnitOfWork uow = new UnitOfWork())
-            //{
-            //    uow.Repository<Customer>().Add( dto);
-            //    if (uow.Save() > 0)
-            //        return null;
-            //}
-            return "";
+            using (UnitOfWork uow = new UnitOfWork())
+            {
+                try
+                {
+                    if (dto != null)
+                    {
+                        var customer = new Customer()
+                        {
+                            Id = dto.Id,
+                            UserName = dto.UserName,
+                            Password = dto.Password,
+                            Mail = dto.Mail
+                        };
+
+                        uow.Repository<Customer>().Add(customer);
+
+                        if (uow.Save() > 0)
+                        {
+                            webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.OK;
+                            return webOperationContext.OutgoingResponse.StatusDescription;
+                        }
+                        else
+                        {
+                            webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError;
+                            return webOperationContext.OutgoingResponse.StatusDescription;
+                        }
+                    }
+                    else
+                    {
+                        webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.NotFound;
+                        return webOperationContext.OutgoingResponse.StatusDescription;
+                    }
+                }
+                catch (Exception)
+                {
+                    throw new WebFaultException(HttpStatusCode.BadRequest);
+                }
+
+            }
         }
 
-        public string DeleteCustomer()
+        public string UpdateCustomer(CustomerDto dto)
         {
-            throw new NotImplementedException();
+            using (UnitOfWork uow = new UnitOfWork())
+            {
+                try
+                {
+                    var customer = uow.Repository<Customer>().Get(dto.Id);
+                    if (customer != null)
+                    {
+
+                        customer.Id = dto.Id;
+                        customer.UserName = dto.UserName;
+                        customer.Password = dto.Password;
+                        customer.Mail = dto.Mail;
+
+                        uow.Repository<Customer>().Update(customer);
+
+                        if (uow.Save() > 0)
+                        {
+                            webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.OK;
+                            return webOperationContext.OutgoingResponse.StatusDescription;
+                        }
+                        else
+                        {
+                            webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError;
+                            return webOperationContext.OutgoingResponse.StatusDescription;
+                        }
+                    }
+                    else
+                    {
+                        webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.NotFound;
+                        return webOperationContext.OutgoingResponse.StatusDescription;
+                    }
+                }
+                catch (Exception)
+                {
+
+                    throw new WebFaultException(HttpStatusCode.BadRequest);
+                }
+
+            }
         }
 
         public string GetCustomer()
         {
-            throw new NotImplementedException();
+            using (UnitOfWork uow = new UnitOfWork())
+            {
+                try
+                {
+                    return "";
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+            }
         }
 
-        public string UpdateCustomer()
+        public string DeleteCustomer(CustomerDto dto)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (UnitOfWork uow = new UnitOfWork())
+                {
+                    var customer = uow.Repository<Customer>().Get(dto.Id);
+                    if (customer != null)
+                    {
+                        uow.Repository<Customer>().Delete(uow.Repository<Customer>().Get(dto.Id));
+                        if (uow.Save() > 0)
+                        {
+                            webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.OK;
+                            return webOperationContext.OutgoingResponse.StatusDescription;
+                        }
+                        else
+                        {
+                            webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError;
+                            return webOperationContext.OutgoingResponse.StatusDescription;
+                        }
+                    }
+                    else
+                    {
+                        webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.NotFound;
+                        return webOperationContext.OutgoingResponse.StatusDescription;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+
+                throw new WebFaultException(HttpStatusCode.BadRequest);
+            }
         }
     }
 }
