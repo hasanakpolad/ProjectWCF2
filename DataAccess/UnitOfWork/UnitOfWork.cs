@@ -1,4 +1,4 @@
-﻿//using Data;
+﻿using Data;
 using DataAccess.Repository;
 using System;
 using System.Collections.Generic;
@@ -10,21 +10,20 @@ namespace DataAccess.UnitOfWork
 {
     public class UnitOfWork : IUnitOfWork
     {
-      //  private project2dbEntities entities = new project2dbEntities();
+        private project2dbEntities entities = new project2dbEntities();
         public void Dispose()
         {
-       //     entities.Dispose();
+            entities.Dispose();
         }
 
         public int Save()
         {
-            //  return entities.SaveChanges(); 
-            return 1;
+            return entities.SaveChanges();
         }
 
         public IRepository<T> Repository<T>() where T : class
         {
-            return new Repository<T>();
+            return new Repository<T>(entities);
         }
     }
 }

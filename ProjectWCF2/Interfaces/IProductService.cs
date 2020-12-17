@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
@@ -12,6 +13,14 @@ namespace ProjectWCF2.Interfaces
     public interface IProductService
     {
         [OperationContract]
-        void DoWork();
+        string AddProject(Product dto);
+
+        [OperationContract]
+        string UpdateProject(Customer dto);
+
+        [OperationContract]
+        string GetProject();
+
+        string DeleteProject();
     }
 }

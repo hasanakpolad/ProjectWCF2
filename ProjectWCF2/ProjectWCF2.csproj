@@ -115,6 +115,10 @@
       <Project>{671dc788-86ad-43a3-b65b-6002fb65a9c5}</Project>
       <Name>DataAccess</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Data\Data.csproj">
+      <Project>{b868fa34-da32-4032-b7df-90bf5f0be3d9}</Project>
+      <Name>Data</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
