@@ -23,7 +23,7 @@ namespace ProjectWCF2.Interfaces
         string UpdateProduct(ProductDto dto);
 
         [OperationContract]
-        [WebInvoke(RequestFormat = WebMessageFormat.Json, Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "GetProduct")]
+        [WebInvoke(RequestFormat = WebMessageFormat.Json, Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "GetProduct?id=(id)")]
         string GetProduct(SearchDto dto);
 
         [OperationContract]

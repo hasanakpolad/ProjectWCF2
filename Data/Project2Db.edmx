@@ -25,6 +25,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProductName" Type="varchar" Nullable="true" MaxLength="45" />
     <Property Name="Price" Type="double" Nullable="false" />
     <Property Name="Stock" Type="int" Nullable="false" />
   </EntityType>
@@ -72,6 +73,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ProductName" Type="String" Nullable="false" />
           <Property Name="Price" Type="Double" Nullable="false" />
           <Property Name="Stock" Type="Int32" Nullable="false" />
         </EntityType>
@@ -115,6 +117,7 @@
       <EntityTypeMapping TypeName="IsTypeOf(project2dbModel.Product)">
         <MappingFragment StoreEntitySet="product">
           <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
           <ScalarProperty Name="Price" ColumnName="Price" />
           <ScalarProperty Name="Stock" ColumnName="Stock" />
         </MappingFragment>

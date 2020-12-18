@@ -5,6 +5,7 @@ using ProjectWCF2.Interfaces;
 using System;
 using System.Net;
 using System.ServiceModel.Web;
+using Newtonsoft.Json;
 
 namespace ProjectWCF2.Services
 {
@@ -98,18 +99,19 @@ namespace ProjectWCF2.Services
             }
         }
 
-        public string GetCustomer()
+        public string GetCustomer(int id)
         {
             using (UnitOfWork uow = new UnitOfWork())
             {
                 try
                 {
-                    return "";
+                    var model = uow.Repository<Customer>().Get(id);
+                    return JsonConvert.SerializeObject(model);
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
 
-                    throw;
+                    throw ex;
                 }
             }
         }

@@ -23,8 +23,8 @@ namespace ProjectWCF2.Interfaces
         string UpdateCustomer(CustomerDto dto);
 
         [OperationContract]
-        [WebInvoke(RequestFormat = WebMessageFormat.Json, Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "GetCustomer")]
-        string GetCustomer();
+        [WebInvoke(RequestFormat = WebMessageFormat.Json, Method = "GET", ResponseFormat = WebMessageFormat.Json, UriTemplate = "GetCustomer?id={id}")]
+        string GetCustomer(int id);
 
         [OperationContract]
         [WebInvoke(RequestFormat = WebMessageFormat.Json, Method = "POST", ResponseFormat = WebMessageFormat.Json, UriTemplate = "DeleteCustomer")]

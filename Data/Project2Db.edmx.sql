@@ -87,7 +87,8 @@ ALTER TABLE `customer` ADD PRIMARY KEY (Id);
 
 
 CREATE TABLE `product`(
-	`Id` int NOT NULL AUTO_INCREMENT UNIQUE, 
+	`Id` int NOT NULL AUTO_INCREMENT UNIQUE,
+	`ProductName` varchar(45),
 	`Price` double NOT NULL, 
 	`Stock` int NOT NULL);
 
