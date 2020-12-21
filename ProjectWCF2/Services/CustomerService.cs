@@ -13,6 +13,11 @@ namespace ProjectWCF2.Services
     {
         WebOperationContext webOperationContext = WebOperationContext.Current;
 
+        /// <summary>
+        /// Customer Dto alıp veri tabanına kayıt edilecek
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns>HttpStatusCode</returns>
         public string AddCustomer(CustomerDto dto)
         {
             using (UnitOfWork uow = new UnitOfWork())
@@ -48,7 +53,7 @@ namespace ProjectWCF2.Services
                         return webOperationContext.OutgoingResponse.StatusDescription;
                     }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     throw new WebFaultException(HttpStatusCode.BadRequest);
                 }
@@ -56,6 +61,11 @@ namespace ProjectWCF2.Services
             }
         }
 
+        /// <summary>
+        /// CustomerDto alıp eşleşen kaydı güncelleyecek
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns>HttpStatusCode</returns>
         public string UpdateCustomer(CustomerDto dto)
         {
             using (UnitOfWork uow = new UnitOfWork())
@@ -99,6 +109,11 @@ namespace ProjectWCF2.Services
             }
         }
 
+        /// <summary>
+        /// Auth Key alıp kayıt dönecek
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Model HttpStatusCode</returns>
         public string GetCustomer(int id)
         {
             using (UnitOfWork uow = new UnitOfWork())
@@ -106,16 +121,29 @@ namespace ProjectWCF2.Services
                 try
                 {
                     var model = uow.Repository<Customer>().Get(id);
-                    return JsonConvert.SerializeObject(model);
+                    if (model != null)
+                    {
+                        webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.OK;
+                        return JsonConvert.SerializeObject(model);
+                    }
+                    else
+                    {
+                        webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.NotFound;
+                        return webOperationContext.OutgoingResponse.StatusDescription;
+                    }
                 }
                 catch (Exception ex)
                 {
-
-                    throw ex;
+                    throw new WebFaultException(HttpStatusCode.BadRequest);
                 }
             }
         }
 
+        /// <summary>
+        /// CustomerDto alıp eşleşen kaydı silecek
+        /// </summary>
+        /// <param name="dto"></param>
+        /// <returns>HttpStatusCode</returns>
         public string DeleteCustomer(CustomerDto dto)
         {
             try
@@ -146,7 +174,6 @@ namespace ProjectWCF2.Services
             }
             catch (Exception)
             {
-
                 throw new WebFaultException(HttpStatusCode.BadRequest);
             }
         }

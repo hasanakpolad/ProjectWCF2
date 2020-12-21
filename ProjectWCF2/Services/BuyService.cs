@@ -24,16 +24,20 @@ namespace ProjectWCF2.Services
                     {
                         if (dto != null)
                         {
-                            BuyHistory history = new BuyHistory()
+                            string deneme = (from p in entities.Product
+                                             select p.ProductName).ToString();
+                            var history = new BuyHistory
                             {
                                 Id = dto.Id,
-                                CustomerId = Convert.ToInt32(from c in entities.Customer
-                                                             where dto.CustomerName == c.UserName
-                                                             select c.Id),
-                                ProductName = dto.ProductName,
+                                //ProductName = (from p in entities.Product
+                                //               select p.ProductName).ToString(),
                                 Price = dto.Price,
-                                Count = Convert.ToInt32(from p in entities.Product
-                                                        select p.Stock - 1)
+                                //ProductId = Convert.ToInt32(from p in entities.Product
+                                //                            where p.ProductName.Equals(dto.ProductName)
+                                //                            select p.Id),
+                                //CustomerId = Convert.ToInt32(from c in entities.Customer
+                                //                             where c.UserName.Equals(dto.CustomerName)
+                                //                             select c.Id)                               
                             };
                             uow.Repository<BuyHistory>().Add(history);
                             if (uow.Save() > 0)
@@ -54,14 +58,14 @@ namespace ProjectWCF2.Services
                         }
                     }
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
                     throw new WebFaultException(HttpStatusCode.BadRequest);
                 }
             }
         }
 
-        public string DeleteSales(BuyHistoryDto dto)
+        public string UpdateSales(BuyHistoryDto dto)
         {
             throw new NotImplementedException();
         }
@@ -71,9 +75,40 @@ namespace ProjectWCF2.Services
             throw new NotImplementedException();
         }
 
-        public string UpdateSales(BuyHistoryDto dto)
+        public string DeleteSales(BuyHistoryDto dto)
         {
-            throw new NotImplementedException();
+            using (UnitOfWork uow = new UnitOfWork())
+            {
+                try
+                {
+                    var history = uow.Repository<BuyHistory>().Get(dto.Id);
+                    if (history != null)
+                    {
+                        uow.Repository<BuyHistory>().Delete(history);
+                        if (uow.Save() > 0)
+                        {
+                            webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.OK;
+                            return webOperationContext.OutgoingResponse.StatusDescription;
+                        }
+                        else
+                        {
+                            webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.InternalServerError;
+                            return webOperationContext.OutgoingResponse.StatusDescription;
+                        }
+                    }
+                    else
+                    {
+                        webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.NotFound;
+                        return webOperationContext.OutgoingResponse.StatusDescription;
+                    }
+                }
+                catch (Exception)
+                {
+
+                    throw new WebFaultException(HttpStatusCode.BadRequest);
+                }
+
+            }
         }
     }
 }

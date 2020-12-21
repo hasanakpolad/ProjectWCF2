@@ -12,22 +12,22 @@ namespace Data
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-
+    
     public partial class project2dbEntities : DbContext
     {
         public project2dbEntities()
             : base("name=project2dbEntities")
         {
         }
-
+    
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
         }
-
-        public virtual DbSet<Customer> Customer { get; set; }
-        public virtual DbSet<Product> Product { get; set; }
+    
         public virtual DbSet<BuyHistory> BuyHistory { get; set; }
+        public virtual DbSet<Customer> Customer { get; set; }
         public virtual DbSet<Log> Log { get; set; }
+        public virtual DbSet<Product> Product { get; set; }
     }
 }

@@ -10,20 +10,20 @@ namespace DataAccess.UnitOfWork
 {
     public class UnitOfWork : IUnitOfWork
     {
-        private project2dbEntities entities = new project2dbEntities();
+        private project2dbEntities _context = new project2dbEntities();
         public void Dispose()
         {
-            entities.Dispose();
+            _context.Dispose();
         }
 
         public int Save()
         {
-            return entities.SaveChanges();
+            return _context.SaveChanges();
         }
 
         public IRepository<T> Repository<T>() where T : class
         {
-            return new Repository<T>(entities);
+            return new Repository<T>(_context);
         }
     }
 }
