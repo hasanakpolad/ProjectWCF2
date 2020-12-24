@@ -10,9 +10,9 @@ namespace DataAccess.Repository
 {
     public class Repository<T> : IRepository<T> where T : class
     {
-        private project2dbEntities _entities;
+        private DbContext _entities;
         private DbSet<T> _dbSet;
-        public Repository(project2dbEntities entities)
+        public Repository(project2dbEntities entities)//DbContext entities
         {
             _entities = entities;
             _dbSet = _entities.Set<T>();

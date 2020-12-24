@@ -1,0 +1,12 @@
+2020-12-24 16:01:25,079 [19] INFO   - Ýþlem BaþarýlýOK
+2020-12-24 16:02:50,252 [9] INFO   - Ýþlem BaþarýlýOK
+2020-12-24 16:04:20,346 [9] INFO   - Ýþlem Baþarýlý OK
+2020-12-24 16:05:10,210 [9] WARN  System.ServiceModel.Web.WebFaultException: Not Found
+ - Ýþlem Baþarýsýz
+2020-12-24 16:06:03,353 [19] WARN  System.ServiceModel.Web.WebFaultException: Not Found
+- Ýþlem Baþarýsýz
+2020-12-24 16:06:35,137 [9] WARN  System.ServiceModel.Web.WebFaultException: Not Found
+- Ýþlem Baþarýsýz2020-12-24 16:07:06,952 [19] WARN  System.ServiceModel.Web.WebFaultException: Not Found
+- Ýþlem Baþarýsýz 
+2020-12-24 16:07:58,137 [9] WARN  System.ServiceModel.Web.WebFaultException: Not Found
+- Ýþlem Baþarýsýz

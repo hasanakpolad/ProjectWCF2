@@ -16,7 +16,7 @@ namespace ProjectWCF2.Services
         WebOperationContext webOperationContext = WebOperationContext.Current;
         public string AddSales(BuyHistoryDto dto)
         {
-            using (UnitOfWork uow = new UnitOfWork())
+            using (var uow = new UnitOfWork())
             {
                 try
                 {
