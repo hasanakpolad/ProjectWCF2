@@ -120,15 +120,16 @@ namespace ProjectWCF2.Services
         /// </summary>
         /// <param name="id"></param>
         /// <returns>Model veya Modeller</returns>
-        public string GetProduct(int id)
+        public string GetProduct(SearchDto search)
         {
             using (UnitOfWork uow = new UnitOfWork())
             {
                 try
                 {
-                    var product = uow.Repository<Product>().Get(id);
+                    var product = uow.Repository<Product>().Get(id); //Pagination yapılacak
                     if (product != null)
                     {
+
                         webOperationContext.OutgoingResponse.StatusCode = HttpStatusCode.OK;
                         log.Info("İşlem Başarılı" + " " + HttpStatusCode.OK);
                         product.ImageBase64.Base64ToString();

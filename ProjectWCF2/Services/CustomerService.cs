@@ -122,7 +122,7 @@ namespace ProjectWCF2.Services
         /// </summary>
         /// <param name="id"></param>
         /// <returns>Model HttpStatusCode</returns>
-        public string GetCustomer(int id)
+        public string GetCustomer(int id) //Authentication uygulanacak (basicAuthentication with AuthKey)
         {
             using (UnitOfWork uow = new UnitOfWork())
             {

@@ -24,8 +24,9 @@ namespace ProjectWCF2.Services
                     {
                         if (dto != null)
                         {
-                            string deneme = (from p in entities.Product
-                                             select p.ProductName).ToString();
+                            var deneme = (from p in entities.Product
+                                          where dto.ProductName.Equals(p.ProductName)
+                                          select p.ProductName).ToList();
                             var history = new BuyHistory
                             {
                                 Id = dto.Id,
